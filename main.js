@@ -1,4 +1,5 @@
 var app = require('app');
+var ipc = require('ipc');
 
 var BrowserWindow = require('browser-window');
 
@@ -36,9 +37,9 @@ app.on('ready', function() {
 
     mainWindow = new BrowserWindow(windowOptions);
 
-    mainWindow.loadUrl('file://' + __dirname + '/index.html');
+    mainWindow.setMenu(null);
 
-    // mainWindow.openDevTools();
+    mainWindow.loadUrl('file://' + __dirname + '/index.html');
 
     mainWindow.on('closed', function() {
         // Dereference the window object, usually you would store windows
@@ -46,4 +47,16 @@ app.on('ready', function() {
         // when you should delete the corresponding element.
         mainWindow = null;
     });
+
+    ipc.on('quit', function(event, arg) {
+        app.quit();
+    });
+
+    ipc.on('toggleDevTools', function(event, arg) {
+        if(mainWindow.isDevToolsOpened()) {
+            mainWindow.closeDevTools();
+        } else {
+            mainWindow.openDevTools();
+        }
+    })
 });
