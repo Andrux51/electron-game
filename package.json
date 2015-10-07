@@ -1,6 +1,6 @@
 {
   "name": "electron-game",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "A game made using Electron",
   "main": "main.js",
   "scripts": {
@@ -17,6 +17,13 @@
   },
   "homepage": "https://github.com/Andrux51/electron-game#readme",
   "devDependencies": {
-    "electron-prebuilt": "^0.33.3"
+    "electron-prebuilt": "^0.33.3",
+    "jasmine": "^2.3.2",
+    "jasmine-core": "^2.3.4",
+    "karma": "^0.13.10",
+    "karma-coverage": "^0.5.2",
+    "karma-jasmine": "^0.3.6",
+    "karma-phantomjs-launcher": "^0.2.1",
+    "phantomjs": "^1.9.18"
   }
 }
