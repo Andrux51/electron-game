@@ -1,10 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="game">
 <head>
 </head>
 <body>
     <h1>Hello World!</h1>
     We are using io.js <script>document.write(process.version)</script>
     and Electron <script>document.write(process.versions['electron'])</script>.
+
+    <div ng-view></div>
+
+    <script src="./bower_components/angular/angular.min.js"></script>
+    <script src="./bower_components/angular-route/angular-route.min.js"></script>
+    <script>
+        // load any necessary node modules for the front end
+        var ipc = require('ipc');
+        window.$ = window.jQuery = require('./bower_components/jquery/dist/jquery.min.js');
+    </script>
+    <script src="./app.js"></script>
+    <script>
+        $(function() {
+            $(document).keyup(function(e) {
+                console.log(e.keyCode);
+
+                switch(e.keyCode) {
+                    case 88:
+                        // press Ctrl+X to quit the application
+                        if(e.ctrlKey) {
+                            if(confirm('Really quit?')) {
+                                ipc.send('quit');
+                            }
+                        }
+                        break;
+                    case 123:
+                        // press F12 to open/close dev tools
+                        ipc.send('toggleDevTools');
+                        break;
+                    default:
+                        break;
+                }
+            });
+        });
+    </script>
 </body>
 </html>
